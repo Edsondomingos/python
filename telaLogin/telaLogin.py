@@ -1,8 +1,11 @@
 from tkinter import  *
 
+usuario = 'Edson'
+senha = '123'
+
 def entrar():
-    usuario = 'Edson'
-    senha = '123'
+    '''Função que compara os dados digitados com as informações já salvas
+        e abri uma nova tela, caso o login tenha sido bem sucedido no login.'''
     if entradaUser.get() == usuario and entradaPwd.get() == senha:
         i.destroy()
         s = Tk()
@@ -13,7 +16,10 @@ def entrar():
         s.mainloop()
     else:
         print('usuario ou senha incorretos')
+        
 
+
+#tela principal. Onde o usuário entra com os dados de login.
 i = Tk()
 i.geometry('200x100')
 
