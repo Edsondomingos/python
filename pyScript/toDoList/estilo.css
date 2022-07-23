@@ -1,0 +1,23 @@
+.add {
+    text-align: center;
+}
+
+button {
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+.todo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.topico {
+    background-color: #5f5;
+    border-radius: 7px;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: bolder;
+}
+

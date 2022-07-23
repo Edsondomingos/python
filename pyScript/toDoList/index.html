@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='estilo.css'/>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+<body> 
+
+    <py-script>
+        from js import console
+        from datetime import datetime
+        tarefas = []
+
+        def atualiza_tarefas():
+            tarefas_aFazer = Element('aFazer')
+            tarefas_aFazer.element.innerText = ''
+            for i in tarefas:
+                tarefas_aFazer.element.innerText += f"{i['conteudo']}\n"
+
+        def cria_tarefa(*ags, **kags):
+            entrada = Element('input_task')
+            tarefa = entrada.element.value
+
+            y = list(filter(lambda x: x['conteudo'] == tarefa, tarefas))
+
+            if len(y) > 0:
+                mensagem = Element('mensagem')
+                mensagem.element.style.display = 'flex'
+                return None
+
+            dict_tarefas = {
+                'id': len(tarefa),
+                'conteudo': tarefa,
+                'data': datetime.now(),
+                'status': 'Fazer',
+            }
+            tarefas.append(dict_tarefas)
+            entrada.element.value = ''
+            atualiza_tarefas()
+
+        def adiciona(e):
+            if e.key == 'Enter':
+                cria_tarefa()
+
+
+        entrada = Element('input_task')
+        entrada.element.onkeypress = adiciona
+
+    </py-script>
+
+    <main class='add'>
+        <h1>PYTHON no navegador</h1>
+        <div>
+            <p style='display: none' id='mensagem'>Já existe</p><br>
+            <h3>Lista de Tarefas</h3>
+            <input type="text" placeholder='Digite uma tarefa' value="" id='input_task' /><br/>
+            <button id='btn_task' type="submit" pys-onClick='cria_tarefa'>Enviar</button>
+        </div>
+    </main>
+
+    <section class='todo'>
+        <h3 class='topico'>A Fazer</h3>
+        <p id='aFazer'></p>
+        <h3 class='topico'>Feitas</h3>
+        <p id='feitas'></p>
+    </section>
+
+</body>
+</html>
